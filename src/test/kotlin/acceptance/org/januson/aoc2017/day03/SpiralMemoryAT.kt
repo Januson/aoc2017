@@ -3,6 +3,7 @@ package acceptance.org.januson.aoc2017.day03
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.FeatureSpec
 import org.januson.aoc2017.day03.Distance
+import org.januson.aoc2017.day03.Sequence
 import org.januson.aoc2017.day03.SpiralMemory
 
 class SpiralMemoryAT : FeatureSpec() {
@@ -11,7 +12,7 @@ class SpiralMemoryAT : FeatureSpec() {
         feature("Solution") {
 
             scenario("first part") {
-                val sequence = org.januson.aoc2017.day03.Sequence()
+                val sequence = Sequence()
                 val value = 277678
                 val result = SpiralMemory(sequence).locationOf(value)
                 val distance = Distance(result)
@@ -20,7 +21,7 @@ class SpiralMemoryAT : FeatureSpec() {
             }
 
             scenario("second part") {
-                val sequence = org.januson.aoc2017.day03.Sequence()
+                val sequence = Sequence()
                 val value = 277678
                 val result = SpiralMemory(sequence).locationOf(value)
                 val distance = Distance(result)

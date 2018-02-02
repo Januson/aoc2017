@@ -10,35 +10,25 @@ import java.io.File
 
 class CaptchaAT : FeatureSpec() {
 
+    private val firstInput = "src/main/resources/day01/first.txt"
+    private val secondInput = "src/main/resources/day01/second.txt"
+
     init {
         feature("Solution") {
 
             scenario("first part") {
-                val data = File("src/main/resources/day01/first.txt")
-                        .readLines()
-                        .map { it.toCharArray() }
-                        .flatMap { it.asList() }
-                        .map { it.toString() }
-                        .map { it.toInt() }
-
+                val data = data(firstInput)
                 val list = CircularList(
                         CircularNextIndex(data.size),
                         data
                 )
-
                 val captcha = Captcha(list)
 
                 captcha.solution() shouldBe 1393
             }
 
             scenario("second part") {
-                val data = File("src/main/resources/day01/second.txt")
-                        .readLines()
-                        .map { it.toCharArray() }
-                        .flatMap { it.asList() }
-                        .map { it.toString() }
-                        .map { it.toInt() }
-
+                val data = data(secondInput)
                 val list = CircularList(
                         HalfwayNextIndex(data.size),
                         data
@@ -49,6 +39,15 @@ class CaptchaAT : FeatureSpec() {
             }
 
         }
+    }
+
+    private fun data(path: String): List<Int> {
+        return File(path)
+                .readLines()
+                .map { it.toCharArray() }
+                .flatMap { it.asList() }
+                .map { it.toString() }
+                .map { it.toInt() }
     }
 }
 

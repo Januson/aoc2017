@@ -6,11 +6,13 @@ import java.io.File
 
 class PassPhrasesAT : FeatureSpec() {
 
+    private val input = "src/main/resources/day04/first.txt"
+
     init {
         feature("Solution") {
 
             scenario("first part") {
-                val result = File("src/main/resources/day04/first.txt")
+                val result = File(input)
                         .readLines()
                         .map { it.split(" ") }
                         .filter { it.size == it.toSet().size }
@@ -20,7 +22,7 @@ class PassPhrasesAT : FeatureSpec() {
             }
 
             scenario("second part") {
-                val result = File("src/main/resources/day04/first.txt")
+                val result = File(input)
                         .readLines()
                         .map { it.split(" ") }
                         .filter { it.size == it.toSet().size }

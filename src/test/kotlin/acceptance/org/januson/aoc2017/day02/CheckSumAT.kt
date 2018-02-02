@@ -6,11 +6,13 @@ import java.io.File
 
 class CheckSumAT : FeatureSpec() {
 
+    private val input = "src/main/resources/day02/first.txt"
+
     init {
         feature("Solution") {
 
             scenario("first part") {
-                val result = File("src/main/resources/day02/first.txt")
+                val result = File(input)
                         .readLines()
                         .map { it.split("\t") }
                         .map { it.map { it.toInt() } }
@@ -20,7 +22,7 @@ class CheckSumAT : FeatureSpec() {
             }
 
             scenario("second part") {
-                val result = File("src/main/resources/day02/first.txt")
+                val result = File(input)
                         .readLines()
                         .map { it.split("\t") }
                         .map { it.map { it.toInt() } }
