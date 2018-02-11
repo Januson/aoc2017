@@ -6,23 +6,26 @@ import java.io.File
 
 class CircusAT : FeatureSpec() {
 
-    private val firstInput = "src/main/resources/day07/first.txt"
+    private val input = "src/main/resources/day07/first.txt"
 
     init {
         feature("Solution") {
 
             scenario("first part") {
-                val data = File(firstInput)
+                val data = File(input)
                         .readLines()
+                        .map { Row(it) }
                 val root = Root(data)
-                root.name() shouldBe "ahnofa"
+                root.name() shouldBe "cqmvs"
             }
 
-            scenario("first part") {
-                val data = File(firstInput)
+            scenario("second part") {
+                val data = File(input)
                         .readLines()
+                        .map { Row(it) }
                 val root = Root(data)
-                root.name() shouldBe "ahnofa"
+
+//                root.wea() shouldBe "ahnofa"
             }
 
         }
@@ -31,47 +34,17 @@ class CircusAT : FeatureSpec() {
 }
 
 class Root(
-        private val data: List<String>
+        private val rows: List<Row>
 ) {
-
-    private val delimiter = " -> "
-    private val nameWeightDelimiter = " "
-    private val programDelimiter = ", "
 
     fun name(): String {
         val programs = mutableSetOf<String>()
         val subPrograms = mutableSetOf<String>()
-        for (row in data) {
-            val programPart = row.substringBefore(delimiter)
-            programs.add(programPart.substringBefore(nameWeightDelimiter))
-            if (row.contains(delimiter)) {
-                val subPart = row.substringAfter(delimiter)
-                subPrograms.addAll(subPart.split(programDelimiter))
-            }
+        for (row in rows) {
+            programs.add(row.program())
+            subPrograms.addAll(row.dependencies())
         }
         return programs.minus(subPrograms).first()
-    }
-
-}
-
-class Row(
-        private val text: String
-) {
-
-    private val delimiter = " -> "
-    private val nameWeightDelimiter = " "
-    private val programDelimiter = ", "
-
-    private val weightPrefix = "("
-    private val weightSuffix = ")"
-
-    fun program(): Program {
-        val programPart = text.substringBefore(delimiter)
-        val name = programPart.substringBefore(nameWeightDelimiter)
-        val weight = programPart
-                .substringAfter(nameWeightDelimiter)
-                .removeSurrounding(weightPrefix, weightSuffix)
-        return Program(name, weight.toInt())
     }
 
 }
