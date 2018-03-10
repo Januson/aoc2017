@@ -6,16 +6,28 @@ interface Generator {
 
 }
 
-class DefaultGenerator(
+class SequenceGenerator(
         private val factor: Long,
-        private val start: Value,
-        private val criteria: Int
+        private val start: Value
 ) : Generator {
 
     override fun sequence(): Sequence<Value> {
         return generateSequence(start.next(factor)) { previous ->
             (previous.next(factor))
-        }.filter { it.divisibleBy(criteria) }
+        }
+    }
+
+}
+
+class Criteriator(
+        private val generator: Generator,
+        private val multiple: Int
+) : Generator {
+
+    override fun sequence(): Sequence<Value> {
+        return generator
+                .sequence()
+                .filter { it.divisibleBy(multiple) }
     }
 
 }

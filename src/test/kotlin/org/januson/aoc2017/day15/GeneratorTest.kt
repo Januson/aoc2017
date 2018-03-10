@@ -1,9 +1,6 @@
 package org.januson.aoc2017.day10
 
-import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.FeatureSpec
-import org.januson.aoc2017.day15.DefaultGenerator
-import org.januson.aoc2017.day15.Value
 
 class GeneratorTest : FeatureSpec() {
 
@@ -18,7 +15,7 @@ class GeneratorTest : FeatureSpec() {
             val firstValue = 14840581
 
 //            scenario("starts at") {
-//                val generator = DefaultGenerator(factorA, Value(startA))
+//                val generator = SequenceGenerator(factorA, Value(startA))
 //
 //                val current = generator.current()
 //
@@ -26,7 +23,7 @@ class GeneratorTest : FeatureSpec() {
 //            }
 //
 //            scenario("fist calculated value") {
-//                val generator = DefaultGenerator(factorA, Value(startA))
+//                val generator = SequenceGenerator(factorA, Value(startA))
 //
 //                generator.advance()
 //                val current = generator.current()
