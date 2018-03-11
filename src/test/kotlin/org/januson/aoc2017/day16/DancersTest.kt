@@ -20,7 +20,7 @@ class DancersTest : FeatureSpec() {
             scenario("one dancer moves after single spin") {
                 val dancers = Dancers()
 
-                dancers.dance(Spin(1))
+                dancers.dance(listOf(Spin(1)))
 
                 dancers.show() shouldBe "pabcdefghijklmno"
             }
@@ -28,7 +28,7 @@ class DancersTest : FeatureSpec() {
             scenario("three dancers moves after three spins") {
                 val dancers = Dancers()
 
-                dancers.dance(Spin(3))
+                dancers.dance(listOf(Spin(3)))
 
                 dancers.show() shouldBe "nopabcdefghijklm"
             }
@@ -38,7 +38,7 @@ class DancersTest : FeatureSpec() {
             scenario("one dancer moves after single spin") {
                 val dancers = Dancers()
 
-                dancers.dance(Exchange(0, 1))
+                dancers.dance(listOf(Exchange(0, 1)))
 
                 dancers.show() shouldBe "bacdefghijklmnop"
             }
@@ -46,7 +46,7 @@ class DancersTest : FeatureSpec() {
             scenario("three dancers moves after three spins") {
                 val dancers = Dancers()
 
-                dancers.dance(Exchange(1, 15))
+                dancers.dance(listOf(Exchange(1, 15)))
 
                 dancers.show() shouldBe "apcdefghijklmnob"
             }

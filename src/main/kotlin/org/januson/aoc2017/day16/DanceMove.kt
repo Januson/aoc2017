@@ -1,23 +1,18 @@
 package org.januson.aoc2017.day16
 
-import java.util.*
-
 
 interface DanceMove {
 
-    fun dance(dancers: List<Dancer>): List<Dancer>
+    fun dance(dancers: String): String
 
 }
 
 class Spin(
-        private val number: Int
-): DanceMove {
+        private val times: Int
+) : DanceMove {
 
-    override fun dance(dancers: List<Dancer>): List<Dancer> {
-        val last = dancers.reversed().take(number)
-        val reversed = last.reversed().toMutableList()
-        reversed.addAll(dancers.dropLast(number))
-        return reversed.toList()
+    override fun dance(dancers: String): String {
+        return dancers.substring(dancers.length - times) + dancers.substring(0, dancers.length - times)
     }
 
 }
@@ -25,29 +20,24 @@ class Spin(
 class Exchange(
         private val firstPosition: Int,
         private val secondPosition: Int
-): DanceMove {
+) : DanceMove {
 
-    override fun dance(dancers: List<Dancer>): List<Dancer> {
-        val dancing = dancers.toMutableList()
-        Collections.swap(dancing, firstPosition, secondPosition)
-        return dancing.toList()
+    override fun dance(dancers: String): String {
+        val chars = dancers.toCharArray()
+        chars[secondPosition] = dancers[firstPosition]
+        chars[firstPosition] = dancers[secondPosition]
+        return String(chars)
     }
 
 }
 
 class Partner(
-        private val first: Dancer,
-        private val second: Dancer
-): DanceMove {
+        private val first: Char,
+        private val second: Char
+) : DanceMove {
 
-    override fun dance(dancers: List<Dancer>): List<Dancer> {
-        val firstPosition = dancers.indexOf(first)
-        val secondPosition = dancers.indexOf(second)
-        if (firstPosition < 0 || secondPosition < 0) {
-            println(first.name)
-            println(second.name)
-        }
-        return Exchange(firstPosition, secondPosition).dance(dancers)
+    override fun dance(dancers: String): String {
+        return Exchange(dancers.indexOf(first), dancers.indexOf(second)).dance(dancers)
     }
 
 }

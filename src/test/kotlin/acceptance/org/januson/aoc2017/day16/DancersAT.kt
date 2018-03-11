@@ -16,32 +16,20 @@ class DancersAT : FeatureSpec() {
                 val moves = moves(firstInput)
                 val dancers = Dancers()
 
-                moves.forEach { move -> dancers.dance(move) }
+                dancers.dance(moves)
 
                 dancers.show() shouldBe "giadhmkpcnbfjelo"
             }
 
             scenario("second part") {
-//                val start = "abcdefghijklmnop"
-//                val end = "giadhmkpcnbfjelo"
-//                val positions = Positions(start, end)
-//                val dance = Dance(positions)
-//
-//                val finalStance = dance.times(ONE_BILLION)
-//
-//                finalStance shouldBe "giadhmkpcnbfjelo"
-
                 val moves = moves(firstInput)
                 val dancers = Dancers()
 
-                for (i in 0..ONE_BILLION) {
-                    if (i % 10000 == 0) {
-                        println(i)
-                    }
-                    moves.forEach { move -> dancers.dance(move) }
+                repeat(ONE_BILLION) {
+                    dancers.dance(moves)
                 }
 
-                dancers.show() shouldBe "giadhmkpcnbfjelo"
+                dancers.show() shouldBe "njfgilbkcoemhpad"
             }
 
         }
@@ -100,7 +88,7 @@ class DancersAT : FeatureSpec() {
 
     private fun toPartner(move: String): DanceMove {
         val parts = move.substring(1).split("/")
-        return Partner(Dancer(parts.first()), Dancer(parts.last()))
+        return Partner(parts.first().first(), parts.last().first())
     }
 
     private companion object {
